@@ -9,6 +9,6 @@ public interface StaffRepo {
 	Staff createUnit(Staff user);
 	Staff getUnit(String email);
 	Staff updateUnit(String email, Staff user);
-	void deleteUnit(String email);
+	String deleteUnit(String email);
 	List<Staff> reportAllUnits();
 }

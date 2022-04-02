@@ -51,9 +51,9 @@ public class StaffController {
 
 	@RequestMapping(value = "/staff/{unitId}", method = RequestMethod.DELETE)
 	@ResponseBody
-	public void deleteUnit(@PathVariable("sunitId") String unitId) {
+	public String deleteUnit(@PathVariable("unitId") String unitId) {
 		log.info("(Service Side) Deleting unit: " + unitId);
-		staffRepo.deleteUnit(unitId);
+		return staffRepo.deleteUnit(unitId);
 	}
 
 	@RequestMapping(value = "/staff", method = RequestMethod.GET)

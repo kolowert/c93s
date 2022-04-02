@@ -21,7 +21,7 @@ public class StaffRepoFake implements StaffRepo {
 	}
 
 	private static void initRepo() {
-		Staff s1 = new Staff("s1", "Arnold", "Schwarz", "arny@hollywood.fun", "cashier", "ar123");
+		Staff s1 = new Staff("s1", "Arnold", "Schwarzenegger", "arny@hollywood.fun", "cashier", "ar123");
 		Staff s2 = new Staff("s2", "Bruce", "Willis", "brus@hollywood.fun", "senior cashier", "br123");
 		Staff s3 = new Staff("s3", "Chack", "Noris", "chack@hollywood.fun", "commodity expert", "ch123");
 		repo.put(s1.getId(), s1);
@@ -30,30 +30,31 @@ public class StaffRepoFake implements StaffRepo {
 	}
 
 	@Override
-	public Staff createUnit(Staff staffUnit) {
-		repo.put(staffUnit.getId(), staffUnit);
-		return staffUnit;
+	public Staff createUnit(Staff unit) {
+		repo.put(unit.getId(), unit);
+		return unit;
 	}
 
 	@Override
-	public Staff getUnit(String staffId) {
-		return repo.get(staffId);
+	public Staff getUnit(String unitId) {
+		return repo.get(unitId);
 	}
 
 	@Override
-	public Staff updateUnit(String staffId, Staff staffUnit) {
-		boolean isRemoved = repo.remove(staffId, staffUnit);
+	public Staff updateUnit(String unitId, Staff unit) {
+		boolean isRemoved = true; // repo.remove(unitId, unit);
 		if (isRemoved) {
-			repo.put(staffId, staffUnit);
+			repo.put(unitId, unit);
 		} else {
 			throw new UnitNotFoundException();
 		}
-		return null;
+		return unit;
 	}
 
 	@Override
-	public void deleteUnit(String staffId) {
-		repo.remove(staffId);
+	public String deleteUnit(String unitId) {
+		repo.remove(unitId);
+		return String.format("Unit with id %s is deleted", unitId);
 	}
 
 	@Override
