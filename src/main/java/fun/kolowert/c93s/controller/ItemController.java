@@ -11,18 +11,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import fun.kolowert.c93s.model.Staff;
-import fun.kolowert.c93s.repository.StaffRepo;
+import fun.kolowert.c93s.model.Item;
+import fun.kolowert.c93s.repository.ItemRepo;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-public class StaffController {
+public class ItemController {
 	
-	private static final String UNIT_INFO = "Staff";
+	private static final String UNIT_INFO = "Item";
 	
 	@Autowired
-	private StaffRepo staffRepo;
+	private ItemRepo itemRepo;
 
 	@RequestMapping("/")
 	@ResponseBody
@@ -30,39 +30,39 @@ public class StaffController {
 		return "Welcome to c93s Example.";
 	}
 
-	@PostMapping("/staff")
+	@PostMapping("/item")
 	@ResponseBody
-	public Staff addUnit(@RequestBody Staff unit) {
+	public Item addUnit(@RequestBody Item unit) {
 		log.info("(Service Side) Creating Unit {} with id: {}", UNIT_INFO, unit.getId());
-		return staffRepo.createUnit(unit);
+		return itemRepo.createUnit(unit);
 	}
 
-	@RequestMapping(value = "/staff/{unitId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/item/{unitId}", method = RequestMethod.GET)
 	@ResponseBody
-	public Staff getUnit(@PathVariable("unitId") String unitId) {
+	public Item getUnit(@PathVariable("unitId") String unitId) {
 		log.info("(Service Side) reading Unit {} with id: {}", UNIT_INFO, unitId);
-		return staffRepo.getUnit(unitId);
+		return itemRepo.getUnit(unitId);
 	}
 
-	@RequestMapping(value = "/staff", method = RequestMethod.PUT)
+	@RequestMapping(value = "/item", method = RequestMethod.PUT)
 	@ResponseBody
-	public Staff updateUnit(@RequestBody Staff unit) {
+	public Item updateUnit(@RequestBody Item unit) {
 		log.info("(Service Side) Editing Unit {}: {}", UNIT_INFO, unit.getId());
-		return staffRepo.updateUnit(unit.getId(), unit);
+		return itemRepo.updateUnit(unit.getId(), unit);
 	}
 
-	@RequestMapping(value = "/staff/{unitId}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/item/{unitId}", method = RequestMethod.DELETE)
 	@ResponseBody
 	public String deleteUnit(@PathVariable("unitId") String unitId) {
 		log.info("(Service Side) Deleting unit {}: {}", UNIT_INFO, unitId);
-		return staffRepo.deleteUnit(unitId);
+		return itemRepo.deleteUnit(unitId);
 	}
 
-	@RequestMapping(value = "/staff", method = RequestMethod.GET)
+	@RequestMapping(value = "/item", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Staff> reportAllUnits() {
+	public List<Item> reportAllUnits() {
 		log.info("All units {} are reported as List<unit>", UNIT_INFO);
-		return staffRepo.reportAllUnits();
+		return itemRepo.reportAllUnits();
 	}
 
 }
